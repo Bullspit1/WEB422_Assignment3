@@ -7,10 +7,15 @@ import reportWebVitals from './reportWebVitals';
 //Import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//Import BrowserRouter to add routes to application
+import { BrowserRouter } from 'react-router-dom';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

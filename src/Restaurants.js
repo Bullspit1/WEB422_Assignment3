@@ -31,6 +31,7 @@ export default function Restaurants(){
             // console.log(`https://serene-dawn-47935.herokuapp.com/api/restaurants?page=${page}&perPage=${perPage}${borough === undefined ? "" : ("&borough=" + borough.charAt(0).toUpperCase() + borough.slice(1))}`);
             // console.log(data)
             setRestaurants(data);
+            // console.log(restaurants.length);
         });
         // console.log(query.borough);
     }, [page, borough]);
@@ -51,8 +52,22 @@ export default function Restaurants(){
 
     return(
         <>
-        <p>Restaurants query: {borough}</p>
+        {restaurants === null ? 
         <Card>
+            <Card.Body>
+                <Card.Text>Loading Restarants.</Card.Text>
+            </Card.Body>
+        </Card>
+        : 
+        restaurants.length === 0 ? 
+            <Card>
+                <Card.Body>
+                    <Card.Text>No Restaurants Found.</Card.Text>
+                </Card.Body>
+            </Card>
+            :
+            <>
+            <Card>
             <Card.Body>
             <Card.Title>Restaurant List</Card.Title>
             <Card.Text>Full list of restaurants. Optinally sorted by borough.</Card.Text>
@@ -69,21 +84,29 @@ export default function Restaurants(){
                 </tr>
             </thead>
             <tbody>
-                {restaurants.map(restaurant =>
+                {
+                restaurants.map(restaurant =>
                     <tr key={restaurant._id} onClick={()=>{ history.push(`/restaurant/${restaurant._id}`)}}>
                         <td>{restaurant.name}</td>
                         <td>{restaurant.address.building + " " + restaurant.address.street}</td>
                         <td>{restaurant.borough}</td>
                         <td>{restaurant.cuisine}</td>
                     </tr>
-                )}
+                )
+                }
             </tbody>
         </Table>
+
         <Pagination>
             <Pagination.Prev onClick={previousPage}/>
                 <Pagination.Item>{page}</Pagination.Item>
             <Pagination.Next onClick={nextPage}/>
         </Pagination>
+        </>
+        }
+        
+        
+        
         </>
     );
 }

@@ -52,6 +52,8 @@ export default function Restaurant(){
             </Card.Body>
         </Card>
 
+        <br />
+        
         <MapContainer style={{"height": "400px"}} center={[restaurant.address.coord[1], restaurant.address.coord[0]]} zoom={13} 
         scrollWheelZoom={false}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -71,7 +73,7 @@ export default function Restaurant(){
                     </Card.Body>
                     <Card.Footer>
                     <Card.Text>
-                        Compleated: {restaurantData.date}
+                        Compleated: {new Date(restaurantData.date).toLocaleDateString()}
                     </Card.Text>
                     </Card.Footer>
                 </Card>
